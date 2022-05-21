@@ -8,8 +8,8 @@ public abstract class Automobile extends Vehicle{
     //Enum
     private Boolean polorizeWindows;
 
-    public Automobile(String brand, String id, double basePrice, double sellPrice, int model, int displacement, String km, boolean state, String plate, TecnoMecanica tecnoMecanica, Soat soat, Boolean typeCar, int numberDoors, Boolean polorizeWindows) {
-        super(brand, id, basePrice, sellPrice, model, displacement, km, state, plate, tecnoMecanica, soat);
+    public Automobile(String brand, String id, double basePrice, double sellPrice, int model, int displacement, String km, boolean state, String plate, TecnoMecanica tecnoMecanica, Soat soat, PropertyCard propertyCard, Boolean typeCar, int numberDoors, Boolean polorizeWindows) {
+        super(brand, id, basePrice, sellPrice, model, displacement, km, state, plate, tecnoMecanica, soat, propertyCard);
         this.typeCar = typeCar;
         this.numberDoors = numberDoors;
         this.polorizeWindows = polorizeWindows;

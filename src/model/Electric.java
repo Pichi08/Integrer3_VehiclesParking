@@ -1,4 +1,5 @@
 package model;
+import java.util.Calendar;
 
 public class Electric extends Automobile{
 
@@ -8,8 +9,8 @@ public class Electric extends Automobile{
     private double durationBattery;
     private double consumeBattery;
 
-    public Electric(String brand, String id, double basePrice, double sellPrice, int model, int displacement, String km, boolean state, String plate, TecnoMecanica tecnoMecanica, Soat soat, Boolean typeCar, int numberDoors, Boolean polorizeWindows, boolean typeCharger, double durationBattery, double consumeBattery) {
-        super(brand, id, basePrice, sellPrice, model, displacement, km, state, plate, tecnoMecanica, soat, typeCar, numberDoors, polorizeWindows);
+    public Electric(String brand, String id, double basePrice, double sellPrice, int model, int displacement, String km, boolean state, String plate, TecnoMecanica tecnoMecanica, Soat soat, PropertyCard propertyCard, Boolean typeCar, int numberDoors, Boolean polorizeWindows, boolean typeCharger, double durationBattery, double consumeBattery) {
+        super(brand, id, basePrice, sellPrice, model, displacement, km, state, plate, tecnoMecanica, soat, propertyCard, typeCar, numberDoors, polorizeWindows);
         this.typeCharger = typeCharger;
         this.durationBattery = durationBattery;
         this.consumeBattery = fuelConsuption();
@@ -26,7 +27,30 @@ public class Electric extends Automobile{
         }
 
         return out;
+    }
+
+    @Override
+    public boolean activeTecno() {
+        boolean out = false;
+        int year = Calendar.getInstance().get(Calendar.YEAR);
+
+        if(super.getTecnoMecanica().getYear()==year){
+            out = true;
+        }
+
+        return out;
+    }
+
+    @Override
+    public boolean activeSoat() {
+        boolean out = false;
+        int year = Calendar.getInstance().get(Calendar.YEAR);
         
+        if(super.getSoat().getYear()==year){
+            out = true;
+        }
+
+        return out;
     }
 
     public String getTypeCharger(){

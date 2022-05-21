@@ -16,9 +16,10 @@ public abstract class Vehicle {
     
     private TecnoMecanica tecnoMecanica;
     private Soat soat;
+    private PropertyCard propertyCard;
 
 
-    public Vehicle(String brand, String id, double basePrice, double sellPrice, int model, int displacement, String km, boolean state, String plate, TecnoMecanica tecnoMecanica, Soat soat) {
+    public Vehicle(String brand, String id, double basePrice, double sellPrice, int model, int displacement, String km, boolean state, String plate, TecnoMecanica tecnoMecanica, Soat soat, PropertyCard propertyCard) {
         this.brand = brand;
         this.id = id;
         this.basePrice = basePrice;
@@ -30,9 +31,14 @@ public abstract class Vehicle {
         this.plate = plate;
         this.tecnoMecanica = tecnoMecanica;
         this.soat = soat;
+        this.propertyCard = propertyCard;
     }
-
+    
     public abstract double fuelConsuption();
+
+    public abstract boolean activeTecno();
+
+    public abstract boolean activeSoat();
 
     public String getId(){
         return id;
@@ -80,6 +86,10 @@ public abstract class Vehicle {
 
     public Soat getSoat() {
         return soat;
+    }
+
+    public PropertyCard getPropertyCard() {
+        return propertyCard;
     }
 
     public String getBrand(){
