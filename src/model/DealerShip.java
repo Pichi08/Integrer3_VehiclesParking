@@ -319,43 +319,86 @@ public class DealerShip {
 
         for(int i = 0; i<vehicles.size(); i++){
 
+            //Para que los casos de pruba se les calcule el precio de venta
+            int documentation = 0;
+            double total= 0;
+            double base = 0;
+
+            if(vehicles.get(i).getSellPrice()==-1){
+
+                base = vehicles.get(i).getBasePrice();
+
+                if(vehicles.get(i).getState()==true || vehicles.get(i).activeSoat()==false || vehicles.get(i).activeTecno()==false){
+                    documentation=500000;
+                }
+                if(vehicles.get(i) instanceof Electric){
+                    total =0.2;
+                }
+                if(vehicles.get(i) instanceof Hybrid){
+                   total = 0.15;
+                }
+                if(vehicles.get(i) instanceof Gasoline){
+                    total = 0;
+                }
+                if(vehicles.get(i) instanceof Automobile && vehicles.get(i).getState()==false){
+                    total += -0.1;
+                }
+                if(vehicles.get(i) instanceof Motorcicle && vehicles.get(i).getState()==false){
+                    total += -0.02;
+                }
+                if(vehicles.get(i) instanceof Motorcicle){
+                    total += 0.04; 
+                }
+                System.out.println(documentation);
+                base = base+(base*total)+documentation;
+                vehicles.get(i).setSellPrice(base);
+            }
+
             if(var==1){
 
                 if(varVehicle==1){
-                    out += ((Gasoline)vehicles.get(i)).toString();
+                    if(vehicles.get(i)!=null && vehicles.get(i) instanceof Gasoline){
+                        out += ((Gasoline)vehicles.get(i)).toString();
+                    } 
                 }else if(varVehicle==2){
-                    out += ((Electric)vehicles.get(i)).toString();
+                    if(vehicles.get(i)!=null && vehicles.get(i) instanceof Electric){
+                        out += ((Electric)vehicles.get(i)).toString();
+                    }
                 }else if (varVehicle==3){
-                    out += ((Hybrid)vehicles.get(i)).toString();
+                    if(vehicles.get(i)!=null && vehicles.get(i) instanceof Hybrid){
+                        out += ((Hybrid)vehicles.get(i)).toString();
+                    }
                 }else if (varVehicle==4){
-                    out += ((Motorcicle)vehicles.get(i)).toString();
+                    if(vehicles.get(i)!=null && vehicles.get(i) instanceof Motorcicle){
+                        out += ((Motorcicle)vehicles.get(i)).toString();
+                    }
                 }
 
             } else if(var==2){
 
                 if(vehicles.get(i) instanceof Gasoline || vehicles.get(i) instanceof Hybrid || vehicles.get(i) instanceof Motorcicle){
                     if(varFuel==1){
-                        if(((Gasoline)vehicles.get(i)).getTypeGasoline().equals("corriente")){
+                        if(vehicles.get(i) instanceof Gasoline && ((Gasoline)vehicles.get(i)).getTypeGasoline().equals("corriente")){
                             out+=vehicles.get(i).toString();
-                        } else if (((Hybrid)vehicles.get(i)).getTypeGasoline().equals("corriente")){
+                        } else if (vehicles.get(i) instanceof Hybrid && ((Hybrid)vehicles.get(i)).getTypeGasoline().equals("corriente")){
                             out+=vehicles.get(i).toString();
-                        } else if (((Motorcicle)vehicles.get(i)).getTypeGasoline().equals("corriente")){
+                        } else if (vehicles.get(i) instanceof Motorcicle && ((Motorcicle)vehicles.get(i)).getTypeGasoline().equals("corriente")){
                             out+=vehicles.get(i).toString();
                         }
                     } else if (varFuel==2){
-                        if(((Gasoline)vehicles.get(i)).getTypeGasoline().equals("extra")){
+                        if(vehicles.get(i) instanceof Gasoline && ((Gasoline)vehicles.get(i)).getTypeGasoline().equals("extra")){
                             out+=vehicles.get(i).toString();
-                        } else if (((Hybrid)vehicles.get(i)).getTypeGasoline().equals("extra")){
+                        } else if (vehicles.get(i) instanceof Hybrid && ((Hybrid)vehicles.get(i)).getTypeGasoline().equals("extra")){
                             out+=vehicles.get(i).toString();
-                        } else if (((Motorcicle)vehicles.get(i)).getTypeGasoline().equals("extra")){
+                        } else if (vehicles.get(i) instanceof Motorcicle && ((Motorcicle)vehicles.get(i)).getTypeGasoline().equals("extra")){
                             out+=vehicles.get(i).toString();
                         }
                     } else if (varFuel==3){
-                        if(((Gasoline)vehicles.get(i)).getTypeGasoline().equals("diesel")){
+                        if(vehicles.get(i) instanceof Gasoline && ((Gasoline)vehicles.get(i)).getTypeGasoline().equals("diesel")){
                             out+=vehicles.get(i).toString();
-                        } else if (((Hybrid)vehicles.get(i)).getTypeGasoline().equals("diesel")){
+                        } else if (vehicles.get(i) instanceof Hybrid && ((Hybrid)vehicles.get(i)).getTypeGasoline().equals("diesel")){
                             out+=vehicles.get(i).toString();
-                        } else if (((Motorcicle)vehicles.get(i)).getTypeGasoline().equals("diesel")){
+                        } else if (vehicles.get(i) instanceof Motorcicle && ((Motorcicle)vehicles.get(i)).getTypeGasoline().equals("diesel")){
                             out+=vehicles.get(i).toString();
                         }
                     }
@@ -375,6 +418,10 @@ public class DealerShip {
 
             }
 
+        }
+
+        if(out.equals("")){
+            out = "Search not found\n";
         }
 
         return out;
@@ -402,7 +449,7 @@ public class DealerShip {
                     TecnoMecanica tecnoMecanica = vehicles.get(i).getTecnoMecanica();
                     out += "The number of the Tecno-Mecanica is: "+tecnoMecanica.getNumberDocument()+"\n";   
                 }
-                if(vehicles.get(i).getState()==false){
+                if(vehicles.get(i).getState()==true){
                     out += "The vehicle has no Property Card"+"\n";
                 }else{
                     PropertyCard propertyCard = vehicles.get(i).getPropertyCard();

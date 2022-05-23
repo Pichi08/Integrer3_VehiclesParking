@@ -16,6 +16,7 @@ public class InitModel {
         Soat soat = new Soat("",-1, 2022, -1);
         PropertyCard propertyCard = new PropertyCard("",-1, -1);
         vehicles.add(new Gasoline("Ferrari","A00",100000, -1, 2001, 300, "0", false, "000000", tecnoMecanica, soat, propertyCard, true, 2, true, 80, "extra", 8));
+        
 
         TecnoMecanica a = new TecnoMecanica("",-1, 2022, -1);
         Soat b = new Soat("",-1, 2022, -1);
